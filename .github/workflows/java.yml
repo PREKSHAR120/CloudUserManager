@@ -1,0 +1,30 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Compile Java Code
+        run: |
+          javac User.java CloudUserManager.java
+
+      - name: Run Java Code
+        run: |
+          echo '1\nJohn\nadmin\nGroup1\n3\n5' | java CloudUserManager
