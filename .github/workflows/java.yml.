@@ -1,0 +1,35 @@
+name: Java CI
+
+# Trigger the workflow on push to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # This is the operating system where the action will run (Linux)
+    
+    steps:
+      # Step 1: Checkout the code from GitHub
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Java JDK
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'  # Specify the Java version (11 is a common version)
+
+      # Step 3: Compile Java code
+      - name: Compile Java code
+        run: |
+          javac User.java CloudUserManager.java  # Compiles your Java files
+
+      # Step 4: Run Java code
+      - name: Run Java code
+        run: |
+          java CloudUserManager  # Runs the main Java class (CloudUserManager)
